@@ -1,4 +1,6 @@
-namespace TaskManager
+using System;
+
+namespace CodeReviews.HabitTracker
 {
     class Program
     {
@@ -119,7 +121,7 @@ namespace TaskManager
             Console.Clear();
             Console.Write("Tell the ID of the Habit that you want to delete: ");
 
-            if (!Int32.TryParse(Console.ReadLine(), out int id))
+            if (!int.TryParse(Console.ReadLine(), out int id))
             {
                 Console.WriteLine("Invalid input.");
                 return;
@@ -138,13 +140,13 @@ namespace TaskManager
             Console.Clear();
             Console.WriteLine("What is the ID of the Habit you want to update ?");
 
-            if (!Int32.TryParse(Console.ReadLine(), out int id))
+            if (!int.TryParse(Console.ReadLine(), out int id))
             {
                 Console.WriteLine("Invalid input.");
                 return;
             }
 
-            List<int?> allHabitsIds = DatabaseManager.getHabitsIDs();
+            List<int?> allHabitsIds = DatabaseManager.GetHabitsIds();
 
             if (!allHabitsIds.Contains(id))
             {
@@ -161,7 +163,7 @@ namespace TaskManager
             int? quantity = null;
             if (!string.IsNullOrWhiteSpace(quantityInput))
             {
-                if (Int32.TryParse(quantityInput, out int parsedQuantity))
+                if (int.TryParse(quantityInput, out int parsedQuantity))
                 {
                     quantity = parsedQuantity;
                 }

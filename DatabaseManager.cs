@@ -1,7 +1,6 @@
-﻿using System;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 
-namespace TaskManager
+namespace CodeReviews.HabitTracker
 {
     class DatabaseManager
     {
