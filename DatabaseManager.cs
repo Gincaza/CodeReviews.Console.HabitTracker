@@ -102,41 +102,41 @@ namespace CodeReviews.HabitTracker
         public static bool UpdateHabit(int id, string habitName = null, int? quantity = null, string date = null)
         {
             List<string> parameters = new List<string>();
-            Dictionary<string, object> camps = new Dictionary<string, object>();
+            Dictionary<string, object> sqlParameters = new Dictionary<string, object>();
 
             if (!String.IsNullOrEmpty(habitName))
             {
                 parameters.Add("HabitName = @HabitName");
-                camps.Add("@HabitName", habitName);
+                sqlParameters.Add("@HabitName", habitName);
             }
 
             if (quantity != null)
             {
                 parameters.Add("Quantity = @Quantity");
-                camps.Add("@Quantity", quantity);
+                sqlParameters.Add("@Quantity", quantity);
             }
 
             if (!String.IsNullOrEmpty(date))
             {
                 parameters.Add("Date = @Date");
-                camps.Add("@Date", date);
+                sqlParameters.Add("@Date", date);
             }
 
-            if (camps.Count == 0)
+            if (sqlParameters.Count == 0)
             {
                 Console.WriteLine("Nothing to update.");
                 return false;
             }
 
             string sql = $"UPDATE Habits SET {string.Join(", ", parameters)} WHERE Id = @Id";
-            camps.Add("@Id", id);
+            sqlParameters.Add("@Id", id);
 
             try
             {
                 using var conn = new SQLiteConnection(connectionString);
                 conn.Open();
                 using var cmd = new SQLiteCommand(sql, conn);
-                foreach (var p in camps)
+                foreach (var p in sqlParameters)
                 {
                     cmd.Parameters.AddWithValue(p.Key, p.Value);
                 }
